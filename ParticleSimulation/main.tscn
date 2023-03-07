@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccr4xuxf3geya"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_fm81a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4vd1t"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yjrcc"]
+blend_mode = 1
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fm81a")
+
+[node name="Points" type="Node2D" parent="."]
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Slider" type="VSlider" parent="UI"]
+offset_right = 16.0
+offset_bottom = 179.0
+
+[node name="XAxis" type="Line2D" parent="UI"]
+z_index = -6
+material = SubResource("CanvasItemMaterial_4vd1t")
+points = PackedVector2Array(-143, 500, 1169, 500)
+default_color = Color(0.831373, 0.109804, 0.109804, 1)
+
+[node name="YAxis" type="Line2D" parent="UI"]
+z_index = -6
+material = SubResource("CanvasItemMaterial_yjrcc")
+points = PackedVector2Array(500, -43, 500, 648)
+default_color = Color(0, 0.529412, 0.65098, 1)
+
+[node name="Minimize" type="Button" parent="UI"]
+offset_top = 179.0
+offset_right = 38.0
+offset_bottom = 210.0
+text = "Min"
+flat = true
+
+[node name="Gamma" type="SpinBox" parent="UI"]
+offset_left = 16.0
+offset_top = 31.0
+offset_right = 99.0625
+offset_bottom = 62.0
+max_value = 10.0
+step = 0.01
+prefix = "Gamma = "
+
+[node name="Beta" type="SpinBox" parent="UI"]
+offset_left = 16.0
+offset_right = 99.0625
+offset_bottom = 31.0
+max_value = 1.0
+step = 0.1
+prefix = "Beta = "
+
+[connection signal="value_changed" from="UI/Slider" to="." method="slide"]
+[connection signal="pressed" from="UI/Minimize" to="." method="_on_minimize_pressed"]
